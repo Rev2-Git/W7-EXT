@@ -21,6 +21,7 @@ using StringTools;
 class StoryMenuState extends MusicBeatState
 {
 	var scoreText:FlxText;
+	var rankText:FlxText;
 
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
@@ -30,12 +31,13 @@ class StoryMenuState extends MusicBeatState
 		['Satin-Panties', "High", "Milf"],
 		['Cocoa', 'Eggnog', 'Winter-Horrorland'],
 		['Senpai', 'Roses', 'Thorns'],
-		['Stress', 'Guns', 'Stress'],
-		['Darnell', 'Lit-up', '2hot']
+		['Ugh', 'Guns', 'Stress'],
+		['Darnell', 'Lit-up', '2hot'],
+		['Ukiyo', 'Earworm', 'Machina']
 	];
 	var curDifficulty:Int = 1;
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true];
+	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true, true];
 
 	var weekCharacters:Array<Dynamic> = [
 		['dad', 'bf', 'gf'],
@@ -47,6 +49,7 @@ class StoryMenuState extends MusicBeatState
 		['senpai', 'bf', 'gf'],
 		['tankman', 'bf', 'gf'],
 		['dad', 'pico', 'gf'],
+		['senpai', 'bf', 'gf']
 	];
 
 	var weekNames:Array<String> = [
@@ -58,7 +61,8 @@ class StoryMenuState extends MusicBeatState
 		"RED SNOW",
 		"hating simulator ft. moawling",
 		"TANKMAN", 
-		"Around Philly"
+		"Around Philly",
+		"Cassette Girl"
 	];
 
 	var txtWeekTitle:FlxText;
@@ -66,6 +70,7 @@ class StoryMenuState extends MusicBeatState
 	var curWeek:Int = 0;
 
 	var txtTracklist:FlxText;
+
 
 	var grpWeekText:FlxTypedGroup<MenuItem>;
 	var grpWeekCharacters:FlxTypedGroup<MenuCharacter>;
@@ -97,11 +102,10 @@ class StoryMenuState extends MusicBeatState
 		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
 		txtWeekTitle.alpha = 0.7;
 
-		var rankText:FlxText = new FlxText(0, 10);
-		rankText.text = 'RANK: GREAT';
+		rankText = new FlxText(525, 10, 0);
 		rankText.setFormat(Paths.font("vcr.ttf"), 32);
 		rankText.size = scoreText.size;
-		rankText.screenCenter(X);
+
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFFF9CF51);
@@ -217,7 +221,7 @@ class StoryMenuState extends MusicBeatState
 		txtTracklist.font = rankText.font;
 		txtTracklist.color = 0xFFe55777;
 		add(txtTracklist);
-		// add(rankText);
+		add(rankText);
 		add(scoreText);
 		add(txtWeekTitle);
 
@@ -228,12 +232,38 @@ class StoryMenuState extends MusicBeatState
 		super.create();
 	}
 
+	public var curRank:String = '???';
+
 	override function update(elapsed:Float)
 	{
 		// scoreText.setFormat('VCR OSD Mono', 32);
 		lerpScore = CoolUtil.coolLerp(lerpScore, intendedScore, 0.5);
 
 		scoreText.text = "WEEK SCORE:" + Math.round(lerpScore);
+
+		rankText.text = "RANK:" + (curRank);
+		
+			
+		if (intendedScore == 0)
+			{
+				curRank = '???';
+			}
+		else if (intendedScore <= 50000)
+			{
+				curRank = 'SHIT';
+			}
+		else if (intendedScore <= 75000)
+			{
+				curRank = 'BAD';
+			}
+		else if (intendedScore <= 100000)
+			{
+				curRank = 'GOOD!';
+			}
+		else if (intendedScore >= 100001)
+			{
+				curRank = 'SICK!!';
+			}
 
 		txtWeekTitle.text = weekNames[curWeek].toUpperCase();
 		txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);

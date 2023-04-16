@@ -37,7 +37,9 @@ class FreeplayState extends MusicBeatState
 		0xFFfc96d7,
 		0xFFa0d1ff,
 		0xffff78bf,
-		0xfff6b604
+		0xfff68904,
+		0xff9271fd,
+		0xff6200ff
 	];
 
 	private var grpSongs:FlxTypedGroup<Alphabet>;
@@ -97,6 +99,9 @@ class FreeplayState extends MusicBeatState
 		
 		if (StoryMenuState.weekUnlocked[8] || isDebug)
 			addWeek(['Darnell', 'Lit-up', '2hot'], 8, ['darnell']);
+
+		if (StoryMenuState.weekUnlocked[9] || isDebug)
+			addWeek(['Ukiyo', 'Earworm', 'Machina'], 9, ['cg']);
 
 		// LOAD MUSIC
 

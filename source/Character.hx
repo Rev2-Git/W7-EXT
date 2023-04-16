@@ -511,14 +511,33 @@ class Character extends FlxSprite
 					playAnim('idle');
 					
 				case 'nene':
-					tex = Paths.getSparrowAtlas('characters/Nene');
+					tex = Paths.getSparrowAtlas('characters/Nene_assets');
 					frames = tex;
-					quickAnimAdd('danceLeft', 'Nene left');
-					quickAnimAdd('danceRight', 'Nene right');
+					animation.addByIndices('danceLeft', 'Nene Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+					animation.addByIndices('danceRight', 'Nene Dancing Beat', [30, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 					loadOffsetFile(curCharacter);
 	
 					playAnim('danceRight');
-					
+				
+				case 'cg':
+					frames = Paths.getSparrowAtlas('characters/cassettegirl');
+					quickAnimAdd('idle', 'cassettegirl idle');
+					quickAnimAdd('singUP', 'cassettegirl up');
+					quickAnimAdd('singRIGHT', 'cassettegirl right');
+					quickAnimAdd('singDOWN', 'cassettegirl down');
+					quickAnimAdd('singLEFT', 'cassettegirl left');
+
+					loadOffsetFile(curCharacter);
+
+				case 'cgalt':
+					frames = Paths.getSparrowAtlas('characters/cassettegirl-alt');
+					quickAnimAdd('idle', 'cassettegirl idle alt');
+					quickAnimAdd('singUP', 'cassettegirl up alt');
+					quickAnimAdd('singRIGHT', 'cassettegirl right alt');
+					quickAnimAdd('singDOWN', 'cassettegirl down alt');
+					quickAnimAdd('singLEFT', 'cassettegirl left alt');
+
+					loadOffsetFile(curCharacter);
 			}
 	
 

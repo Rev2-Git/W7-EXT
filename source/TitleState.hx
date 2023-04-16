@@ -414,7 +414,7 @@ class TitleState extends MusicBeatState
 			transitioning = true;
 			// FlxG.sound.music.stop();
 
-			#if newgrounds
+			#if web
 			if (!OutdatedSubState.leftState)
 			{
 				NGio.checkVersion(function(version)
